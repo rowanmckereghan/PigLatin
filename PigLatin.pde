@@ -12,10 +12,25 @@ public void draw()
         //not used
 }
 public int findFirstVowel(String sWord)
-//precondition: sWord is a valid String of length greater than 0.
-//postcondition: returns the position of the first vowel in sWord.  If there are no vowels, returns -1
 {
-	return -1;
+  boolean f = false;
+  int x = -1;
+  String[] b = new String[]{"a", "e", "i", "o", "u"};
+  for (int i = 0; i < sWord.length(); i++)
+  {
+    for(int z = 0; z < b.length; z++)
+    {
+    if (sWord.substring(i, i+1).equals(b[z]))
+    {
+      x = i;
+      f = true;
+      break;
+    }
+    }
+    if (f == true)
+      break;
+  }
+  return x;
 }
 
 public String pigLatin(String sWord)
@@ -28,6 +43,7 @@ public String pigLatin(String sWord)
 	}
 	else
 	{
-		return "ERROR!";
+		int c = findFirstVowel(sWord);
+		return(sWord.substring(c, sWord.length()) + sWord.substring(0, c) + "ay");
 	}
 }
