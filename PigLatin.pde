@@ -1,15 +1,21 @@
 public void setup() 
 {
-	String[] lines = loadStrings("words.txt");
+	int x = 0;
+	String[] lines = loadStrings("LowellHymn.txt");
 	System.out.println("there are " + lines.length + " lines");
-	for (int i = 0 ; i < lines.length; i++) 
+	for (int i = 0; i < lines.length; i++) 
 	{
-	  System.out.println(pigLatin(lines[i]));
+		for(int z = 0; z < findReturn(lines, 0); z++)
+	 		System.out.println(pigLatin(lines[i].substring(z, findPunctuation(lines[i], z))));
 	}
 }
 public void draw()
 {
         //not used
+}
+public int getNum(int x)
+{
+	return x;
 }
 public int findFirstVowel(String sWord)
 {
@@ -46,4 +52,42 @@ public String pigLatin(String sWord)
 		int c = findFirstVowel(sWord);
 		return(sWord.substring(c, sWord.length()) + sWord.substring(0, c) + "ay");
 	}
+}
+
+public int findPunctuation(String r, int c)
+{
+	String[] f = new String[]{" ", ",", "."};
+	int v = -1;
+	for(int h = c; h < r.length(); h++)
+	{
+		if(r.substring(h, h+1).equals(f))
+		{
+			v = h;
+			break;
+		}
+	}
+	return v;
+}
+public int findReturn(String l[], int k)
+{
+	int h = -1;
+	for (int v = k; v < l.length; v++)
+	if (l.substring(v, v+1).equals("\n"))
+	{
+		h = v;
+		break;
+	}
+	return h;
+}
+
+public string findReturn2(String l[], int k)
+{
+	int h = -1;
+	for (int v = k; v < l.length; v++)
+	if (l.substring(v, v+1).equals("\n"))
+	{
+		h = v;
+		break;
+	}
+	return l.substring(k, h);
 }
